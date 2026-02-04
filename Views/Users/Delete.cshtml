@@ -1,0 +1,333 @@
+﻿@model Entishar.Models.User
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<style>
+    .delete-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+        animation: shake 0.5s;
+    }
+
+    @@keyframes shake {
+        0%, 100%
+
+    {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+
+    }
+
+    .page-header h2 {
+        font-weight: 700;
+        color: var(--danger-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .warning-text {
+        color: #991B1B;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background-color: #FEE2E2;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid var(--danger-color);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+        .warning-text i {
+            font-size: 1.5rem;
+        }
+
+    .delete-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .user-preview {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.05) 100%);
+        border: 2px solid #FEE2E2;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .user-preview-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .user-preview-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--danger-color) 0%, #DC2626 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: white;
+    }
+
+    .user-preview-info h4 {
+        font-weight: 700;
+        color: var(--dark-color);
+        margin: 0 0 0.25rem 0;
+    }
+
+    .user-preview-info p {
+        color: #6B7280;
+        margin: 0;
+    }
+
+    .detail-item {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #F3F4F6;
+        align-items: center;
+    }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        flex: 0 0 180px;
+        font-weight: 600;
+        color: var(--dark-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .detail-value {
+        flex: 1;
+        color: #4B5563;
+        font-weight: 500;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .status-active {
+        background-color: #D1FAE5;
+        color: #065F46;
+    }
+
+    .status-inactive {
+        background-color: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .btn-action {
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, var(--danger-color) 0%, #DC2626 100%);
+        color: white;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+            color: white;
+        }
+
+    .btn-cancel {
+        background-color: #F3F4F6;
+        color: #4B5563;
+    }
+
+        .btn-cancel:hover {
+            background-color: #E5E7EB;
+            color: #1F2937;
+        }
+
+    @@media (max-width: 768px) {
+        .detail-item
+
+    {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .detail-label {
+        flex: none;
+    }
+
+    }
+</style>
+
+<div class="delete-container">
+    <div class="page-header">
+        <div class="page-icon">
+            <i class="bi bi-exclamation-triangle"></i>
+        </div>
+        <h2>Delete User</h2>
+    </div>
+
+    <div class="warning-text">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>Are you sure you want to delete this user? This action cannot be undone!</span>
+    </div>
+
+    <div class="delete-card">
+        <div class="user-preview">
+            <div class="user-preview-header">
+                <div class="user-preview-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="user-preview-info">
+                    <h4>@Model.UserFullName</h4>
+                    <p>@@@Model.Username</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-hash"></i>
+                User ID
+            </div>
+            <div class="detail-value">
+                #@Model.Id
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-person"></i>
+                Username
+            </div>
+            <div class="detail-value">
+                @Model.Username
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-person-badge"></i>
+                Full Name
+            </div>
+            <div class="detail-value">
+                @Model.UserFullName
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-toggle-on"></i>
+                Status
+            </div>
+            <div class="detail-value">
+                @if (Model.IsActive)
+                {
+                    <span class="status-badge status-active">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Active
+                    </span>
+                }
+                else
+                {
+                    <span class="status-badge status-inactive">
+                        <i class="bi bi-x-circle-fill"></i>
+                        Inactive
+                    </span>
+                }
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-calendar-event"></i>
+                Date of Birth
+            </div>
+            <div class="detail-value">
+                @Model.DateOfBirth.ToString("MMMM dd, yyyy")
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">
+                <i class="bi bi-calendar-plus"></i>
+                Created
+            </div>
+            <div class="detail-value">
+                @Model.CreationDate.ToString("MMMM dd, yyyy")
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="action-buttons">
+            <a asp-action="Index" class="btn-action btn-cancel">
+                <i class="bi bi-x-circle"></i>
+                Cancel
+            </a>
+            <button type="submit" class="btn-action btn-delete">
+                <i class="bi bi-trash"></i>
+                Yes, Delete User
+            </button>
+        </div>
+    </form>
+</div>

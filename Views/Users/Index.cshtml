@@ -1,0 +1,298 @@
+﻿@model IEnumerable<Entishar.Models.User>
+@{
+    ViewData["Title"] = "Users Management";
+}
+
+<style>
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+        .page-title h2 {
+            font-weight: 700;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .page-title .icon-bg {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+    .page-subtitle {
+        color: #6B7280;
+        margin-left: 66px;
+    }
+
+    .btn-create {
+        background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-create:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+
+    .table-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+        .table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+            .table thead th {
+                border: none;
+                padding: 1rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+            }
+
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover {
+            background-color: #F9FAFB;
+        }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
+    .badge-active {
+        background-color: #D1FAE5;
+        color: #065F46;
+    }
+
+    .badge-inactive {
+        background-color: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn-action {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .btn-edit {
+        background-color: #DBEAFE;
+        color: #1E40AF;
+    }
+
+        .btn-edit:hover {
+            background-color: #3B82F6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .btn-delete {
+        background-color: #FEE2E2;
+        color: #991B1B;
+    }
+
+        .btn-delete:hover {
+            background-color: #EF4444;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .btn-details {
+        background-color: #E0E7FF;
+        color: #4338CA;
+    }
+
+        .btn-details:hover {
+            background-color: #6366F1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #D1D5DB;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h4 {
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: #9CA3AF;
+        }
+
+    @@media (max-width: 768px) {
+        .table-responsive
+
+    {
+        font-size: 0.9rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    }
+</style>
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+        <div>
+            <div class="page-title">
+                <div class="icon-bg">
+                    <i class="bi bi-people"></i>
+                </div>
+                <h2>Users Management</h2>
+            </div>
+            <p class="page-subtitle">Manage all users in your system</p>
+        </div>
+        <a asp-action="Create" class="btn-create">
+            <i class="bi bi-person-plus-fill"></i>
+            Create New User
+        </a>
+    </div>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-person"></i> Username</th>
+                        <th><i class="bi bi-person-badge"></i> Full Name</th>
+                        <th><i class="bi bi-toggle-on"></i> Status</th>
+                        <th><i class="bi bi-calendar-event"></i> Date of Birth</th>
+                        <th><i class="bi bi-calendar-plus"></i> Created</th>
+                        <th><i class="bi bi-tools"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@user.Username</strong>
+                            </td>
+                            <td>@user.UserFullName</td>
+                            <td>
+                                @if (user.IsActive)
+                                {
+                                    <span class="badge badge-active">
+                                        <i class="bi bi-check-circle"></i> Active
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-inactive">
+                                        <i class="bi bi-x-circle"></i> Inactive
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <i class="bi bi-calendar3"></i>
+                                @user.DateOfBirth.ToString("MMM dd, yyyy")
+                            </td>
+                            <td>
+                                <i class="bi bi-clock"></i>
+                                @user.CreationDate.ToString("MMM dd, yyyy")
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-action="Details" asp-route-id="@user.Id" class="btn-action btn-details" title="View Details">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn-action btn-edit" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn-action btn-delete" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="table-card">
+        <div class="empty-state">
+            <i class="bi bi-inbox"></i>
+            <h4>No Users Found</h4>
+            <p>Start by creating your first user</p>
+            <a asp-action="Create" class="btn-create mt-3">
+                <i class="bi bi-person-plus-fill"></i>
+                Create First User
+            </a>
+        </div>
+    </div>
+}

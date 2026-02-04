@@ -1,0 +1,253 @@
+﻿@model Entishar.Models.User
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<style>
+    .form-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .page-header h2 {
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        color: #6B7280;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+    .form-check {
+        padding: 1rem;
+        background-color: #F9FAFB;
+        border-radius: 8px;
+        border: 2px solid #E5E7EB;
+        transition: all 0.3s ease;
+    }
+
+        .form-check:has(.form-check-input:checked) {
+            background-color: #EEF2FF;
+            border-color: var(--primary-color);
+        }
+
+    .form-check-input {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid #D1D5DB;
+        cursor: pointer;
+    }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+    .form-check-label {
+        font-weight: 500;
+        color: var(--dark-color);
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        justify-content: space-between;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+
+    .btn-cancel {
+        background-color: #F3F4F6;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        color: #4B5563;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-cancel:hover {
+            background-color: #E5E7EB;
+            color: #1F2937;
+        }
+
+    .required-indicator {
+        color: var(--danger-color);
+        margin-left: 0.25rem;
+    }
+</style>
+
+<div class="form-container">
+    <div class="page-header">
+        <div class="page-icon">
+            <i class="bi bi-person-plus-fill"></i>
+        </div>
+        <h2>Create New User</h2>
+        <p>Fill in the details below to add a new user to the system</p>
+    </div>
+
+    <div class="form-card">
+        <form asp-action="Create" method="post">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Username" class="form-label">
+                            <i class="bi bi-person"></i>
+                            Username
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <input asp-for="Username" class="form-control" placeholder="Enter username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">
+                            <i class="bi bi-lock"></i>
+                            Password
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label asp-for="UserFullName" class="form-label">
+                            <i class="bi bi-person-badge"></i>
+                            Full Name
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <input asp-for="UserFullName" class="form-control" placeholder="Enter full name" />
+                        <span asp-validation-for="UserFullName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="DateOfBirth" class="form-label">
+                            <i class="bi bi-calendar-event"></i>
+                            Date of Birth
+                            <span class="required-indicator">*</span>
+                        </label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-toggle-on"></i>
+                            Account Status
+                        </label>
+                        <div class="form-check">
+                            <input asp-for="IsActive" type="checkbox" class="form-check-input" id="isActiveCheck" />
+                            <label class="form-check-label" for="isActiveCheck">
+                                Active Account
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a asp-action="Index" class="btn-cancel">
+                    <i class="bi bi-x-circle"></i>
+                    Cancel
+                </a>
+                <button type="submit" class="btn-submit">
+                    <i class="bi bi-check-circle"></i>
+                    Create User
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

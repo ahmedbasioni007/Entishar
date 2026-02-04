@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .login-container {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-card {
+        max-width: 450px;
+        width: 100%;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+        .login-header h2 {
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #6B7280;
+            font-size: 0.95rem;
+        }
+
+    .form-label {
+        font-weight: 500;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        border: 2px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+    .input-group-text {
+        background-color: transparent;
+        border: 2px solid #E5E7EB;
+        border-right: none;
+        color: #6B7280;
+    }
+
+    .input-group .form-control {
+        border-left: none;
+    }
+
+    .input-group:focus-within .input-group-text {
+        border-color: var(--primary-color);
+    }
+
+    .input-group:focus-within .form-control {
+        border-color: var(--primary-color);
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border: none;
+        padding: 0.75rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+
+    .alert-custom {
+        background-color: #FEE2E2;
+        border: 1px solid #FCA5A5;
+        color: #991B1B;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-register {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-register:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+    .login-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="card">
+            <div class="card-body p-4 p-md-5">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i class="bi bi-person-lock"></i>
+                    </div>
+                    <h2>Welcome Back</h2>
+                    <p>Please login to your account</p>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert-custom">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <span>@ViewBag.Error</span>
+                    </div>
+                }
+
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-person"></i> Username
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" name="username" class="form-control" placeholder="Enter your username" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-login">
+                        <i class="bi bi-box-arrow-in-right"></i> Login
+                    </button>
+
+                    <div class="text-center mt-3">
+                        <span class="text-muted">Don't have an account?</span>
+                        <a asp-controller="Users" asp-action="Create" class="btn-register ms-2">
+                            Register
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

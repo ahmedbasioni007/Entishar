@@ -1,0 +1,328 @@
+﻿@model Entishar.Models.User
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<style>
+    .details-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .page-header h2 {
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        color: #6B7280;
+    }
+
+    .details-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+
+    .user-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+    }
+
+    .user-name {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+        .user-name h3 {
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-name .username {
+            color: #6B7280;
+            font-size: 1.1rem;
+        }
+
+    .detail-item {
+        display: flex;
+        padding: 1.25rem;
+        border-bottom: 1px solid #F3F4F6;
+        align-items: center;
+    }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item:hover {
+            background-color: #F9FAFB;
+        }
+
+    .detail-label {
+        flex: 0 0 200px;
+        font-weight: 600;
+        color: var(--dark-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .detail-label i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+    .detail-value {
+        flex: 1;
+        color: #4B5563;
+        font-weight: 500;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .status-active {
+        background-color: #D1FAE5;
+        color: #065F46;
+    }
+
+    .status-inactive {
+        background-color: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-action {
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        color: white;
+    }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            color: white;
+        }
+
+    .btn-back {
+        background-color: #F3F4F6;
+        color: #4B5563;
+    }
+
+        .btn-back:hover {
+            background-color: #E5E7EB;
+            color: #1F2937;
+        }
+
+    .info-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #E5E7EB;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @@media (max-width: 768px) {
+        .detail-item
+
+    {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .detail-label {
+        flex: none;
+    }
+
+    }
+</style>
+
+<div class="details-container">
+    <div class="page-header">
+        <div class="page-icon">
+            <i class="bi bi-person-circle"></i>
+        </div>
+        <h2>User Details</h2>
+        <p>Complete information about this user</p>
+    </div>
+
+    <div class="details-card">
+        <div class="user-avatar">
+            <i class="bi bi-person"></i>
+        </div>
+
+        <div class="user-name">
+            <h3>@Model.UserFullName</h3>
+            <span class="username">@@@Model.Username</span>
+        </div>
+
+        <div class="info-section">
+            <div class="section-title">
+                <i class="bi bi-info-circle"></i>
+                Basic Information
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-hash"></i>
+                    User ID
+                </div>
+                <div class="detail-value">
+                    #@Model.Id
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-person"></i>
+                    Username
+                </div>
+                <div class="detail-value">
+                    @Model.Username
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-person-badge"></i>
+                    Full Name
+                </div>
+                <div class="detail-value">
+                    @Model.UserFullName
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-toggle-on"></i>
+                    Account Status
+                </div>
+                <div class="detail-value">
+                    @if (Model.IsActive)
+                    {
+                        <span class="status-badge status-active">
+                            <i class="bi bi-check-circle-fill"></i>
+                            Active
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="status-badge status-inactive">
+                            <i class="bi bi-x-circle-fill"></i>
+                            Inactive
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-title">
+                <i class="bi bi-calendar"></i>
+                Date Information
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-calendar-event"></i>
+                    Date of Birth
+                </div>
+                <div class="detail-value">
+                    @Model.DateOfBirth.ToString("MMMM dd, yyyy")
+                    <small class="text-muted ms-2">
+                        (@((DateTime.Now.Year - Model.DateOfBirth.Year)) years old)
+                    </small>
+                </div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">
+                    <i class="bi bi-calendar-plus"></i>
+                    Account Created
+                </div>
+                <div class="detail-value">
+                    @Model.CreationDate.ToString("MMMM dd, yyyy")
+                    <small class="text-muted ms-2">
+                        (@((DateTime.Now - Model.CreationDate).Days) days ago)
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a asp-action="Index" class="btn-action btn-back">
+            <i class="bi bi-arrow-left"></i>
+            Back to List
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-action btn-edit">
+            <i class="bi bi-pencil-square"></i>
+            Edit User
+        </a>
+    </div>
+</div>
